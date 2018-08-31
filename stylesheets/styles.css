@@ -40,10 +40,15 @@ html {
 }
 
 /* Utility - Display */
+
+/* Flexbox */
 .d-flex {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
+}
+
+.align-center {
   align-items: center;
 }
 
@@ -144,6 +149,7 @@ html {
 .btn {
   outline: none;
   border: none;
+  border-radius: 5px;
   padding: 10px;
   color: white;
   font-size: 1rem;
@@ -163,7 +169,7 @@ html {
 .wrapper-calc {
   color: var(--main-subtitle-color);
   max-width: 522px;
-  max-height: 550px;
+  max-height: 575px;
   height: 100%;
   width: 100%;
   background-color: #fff;
@@ -181,6 +187,14 @@ html {
   padding: 15px;
   border: 1px solid #ccc;
   border-radius: 3px;
+}
+
+.red-border {
+  border: 1px solid red;
+}
+
+.error-text {
+  color: red;
 }
 
 .range {
