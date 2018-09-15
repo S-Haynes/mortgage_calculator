@@ -7,6 +7,12 @@ const loan = document.querySelector("#loan");
 const tax = document.querySelector("#annualtax");
 const insurance = document.querySelector("#annualinsurance");
 const calculate = document.querySelector("#calculate");
+const results_interest = document.querySelector("#results-interest");
+const results_tax = document.querySelector("#results-tax");
+const results_insurance = document.querySelector("#results-insurance");
+const results_total = document.querySelector("#results-total");
+const wrapper_results = document.querySelector(".wrapper-results");
+const value_font = document.querySelectorAll(".value-font");
 
 // Error DOM selectors
 const loan_errors = document.querySelector("#loanerrors");
@@ -59,9 +65,45 @@ const submitForm = () => {
     return setErrors();
   }
   // Send result data if form is valid
+  setResults();
+};
+
+// Set the results object
+const setResults = () => {
+  // Destructure mortgage obj
+  const { years, interest, loan, tax, insurance } = mortgage;
+
+  results.interest = (
+    ((interest / 100 / 12) * loan) /
+    (1 - Math.pow(1 + interest / 100 / 12, -years * 12))
+  ).toFixed(2);
+  results.tax = (tax / 12).toFixed(2);
+  results.insurance = (insurance / 12).toFixed(2);
+  results.total = (
+    Number(results.interest) +
+    Number(results.tax) +
+    Number(results.insurance)
+  ).toFixed(2);
+  // Send results to the DOM
   displayResults();
 };
 
+const displayResults = () => {
+  // Destructure results obj
+  const { interest, tax, insurance, total } = results;
+
+  results_interest.innerHTML = "$ " + interest;
+  results_tax.innerHTML = "$ " + tax;
+  results_insurance.innerHTML = "$ " + insurance;
+  results_total.innerHTML = "$ " + total;
+
+  wrapper_results.classList.add("fade");
+
+  value_font.forEach(value => {
+    value.style.letterSpacing = "0px";
+    value.classList.remove("gray");
+  });
+};
 // Check form for any errors
 const checkErrors = data => {
   for (let key in data) {
@@ -118,10 +160,6 @@ const clearErrors = () => {
   }
   // Set errors back to empty obj
   errors = {};
-};
-
-const displayResults = () => {
-  console.log(mortgage);
 };
 
 // Initialize the app values

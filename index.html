@@ -11,14 +11,14 @@
 
 <body>
   <!-- App Container -->
-  <div class="container">
+  <div class="container mt-1">
 
     <!-- Title Section -->
     <h2 class="title-font mb-1">Mortgage Calculator</h2>
-    <hr class="hr" />
+    <hr class="hr-header" />
 
     <!-- App Controls -->
-    <div class="wrapper mt-2">
+    <div class="wrapper d-inline mt-2">
       <div class="wrapper-calc p-2">
 
         <!-- Controls Header -->
@@ -31,9 +31,9 @@
             <label class="bold d-block flex-full" for="years">Years of mortgage</label>
           </div>
           <div class="d-flex align-center">
-            <span class="mr-1">1</span>
+            <span class="range-val-years">1</span>
             <input class="range" type="range" id="years" min="1" max="40">
-            <span class="ml-auto mr-1">40</span>
+            <span class="ml-xs mr-1">40</span>
             <span id="display-years" class="display-range ml-auto p-1">40</span>
           </div>
         </div>
@@ -44,9 +44,9 @@
             <label class="mt-2 bold d-block flex-full" for="interest">Rate of interest (%)</label>
           </div>
           <div class="d-flex align-center">
-            <span>0.1</span>
+            <span class="mr-1">0.1</span>
             <input class="range" type="range" id="interest" min="1" max="10">
-            <span class="ml-auto mr-1">10</span>
+            <span class="ml-xs mr-1">10</span>
             <span id="display-interest" class="display-range ml-auto p-1 d-inline text-center">10</span>
           </div>
         </div>
@@ -54,7 +54,7 @@
         <!-- Loan Amount Controller -->
         <div>
           <div class="d-flex mt-1">
-            <label for="loan" class="flex-full bold">Loan Amount</label>
+            <label for="loan" class="flex-full bold no-word-wrap">Loan Amount</label>
           </div>
 
           <div class="d-flex">
@@ -68,7 +68,7 @@
           <!-- Annual Tax Controller -->
           <div class="flex-half">
             <div class="d-flex">
-              <label for="annualtax" class="bold flex-full mb-1">Annual Tax</label>
+              <label for="annualtax" class="bold flex-full mb-1 no-word-wrap">Annual Tax</label>
             </div>
             <div class="d-flex mr-1">
               <input id="annualtax" type="text" class="flex-half input-field" placeholder="$">
@@ -78,7 +78,7 @@
           <!-- Annual Insurance Controller -->
           <div class="flex-half">
             <div class="d-flex">
-              <label for="annualinsurance" class="bold flex-full mb-1">Annual Insurance</label>
+              <label for="annualinsurance" class="bold flex-full mb-1 no-word-wrap">Annual Insurance</label>
             </div>
             <div class="d-flex">
               <input id="annualinsurance" type="text" class="flex-half input-field" placeholder="$">
@@ -92,21 +92,44 @@
         <div class="d-flex mt-1">
           <button id="calculate" class="flex-full btn btn-primary">Calculate</button>
         </div>
-        <!-- Results Container -->
 
+      </div>
+
+    </div>
+    <!-- Results Container -->
+    <div class="wrapper-results d-inline p-2">
+      <div class="d-flex wrap">
         <!-- Results Title Section -->
+        <h2 class="flex-full mb-2">Your Results</h2>
 
-        <!-- Principle & Interest Section -->
+        <!-- Principle & Interest Results -->
 
-        <!-- Tax Section -->
+        <p class="flex-full mb-1">Principle & Interest</p>
+        <p id="results-interest" class="mb-2 flex-full value value-font gray">$--</p>
 
-        <!-- Insurance Section -->
+        <hr class="hr mobile-only" />
+        <!-- Tax Results -->
 
-        <!-- Total Monthly Payments Section -->
+        <p class="mb-1 flex-full">Tax</p>
+        <p id="results-tax" class="mb-2 value value-font gray">$--</p>
+
+
+        <hr class="hr mobile-only" />
+        <!-- Insurance Results -->
+
+        <p class="mb-1 flex-full">Insurance</p>
+        <p id="results-insurance" class="mb-2 value value-font gray">$--</p>
+
+
+        <hr class="hr mb-2" />
+
+        <!-- Total Monthly Payments Results -->
+
+        <h3 class="total-payment mb-1 flex-full">Total Monthly Payment</h3>
+        <p id="results-total" class="mb-2 value value-font gray">$--</p>
       </div>
     </div>
   </div>
-
 
   <script type="text/javascript" src="./js/app.js"></script>
 </body>
