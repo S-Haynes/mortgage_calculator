@@ -1,3 +1,5 @@
+// Functional approach since this is a smaller module.
+
 // General DOM selectors
 const years = document.querySelector("#years");
 const display_years = document.querySelector("#display-years");
@@ -13,6 +15,7 @@ const results_insurance = document.querySelector("#results-insurance");
 const results_total = document.querySelector("#results-total");
 const wrapper_results = document.querySelector(".wrapper-results");
 const value_font = document.querySelectorAll(".value-font");
+const range_inputs = document.querySelectorAll(".range");
 
 // Error DOM selectors
 const loan_errors = document.querySelector("#loanerrors");
@@ -53,6 +56,26 @@ const updateMortgage = () => {
 const updateRangeInputs = () => {
   display_years.innerHTML = years.value;
   display_interest.innerHTML = interest.value;
+
+  // range slider-track color updates
+  range_inputs.forEach(input => {
+    let min = input.getAttribute("min");
+    let max = input.getAttribute("max");
+
+    input.addEventListener("input", () => {
+      let val = (input.value - min) / (max - min);
+
+      input.style.backgroundImage =
+        "-webkit-gradient(linear, left top, right top, " +
+        "color-stop(" +
+        val +
+        ", #1091cc), " +
+        "color-stop(" +
+        val +
+        ", #ccc)" +
+        ")";
+    });
+  });
 };
 
 // Submit form handler

@@ -13,6 +13,7 @@
 * {
   margin: 0;
   padding: 0;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 
@@ -21,6 +22,10 @@ html {
   width: 100%;
   height: 100%;
   font-family: Questrial;
+}
+
+input {
+  width: 100%;
 }
 
 /* Reuseable Utility Classes */
@@ -49,30 +54,49 @@ html {
 
 /* Flexbox */
 .d-flex {
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
   flex-direction: row;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
 }
 
 .no-wrap {
+  -ms-flex-wrap: nowrap;
   flex-wrap: nowrap;
 }
 
 .wrap {
+  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
 }
 
 .align-center {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
 }
 
 .flex-full {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 0 100%;
   flex: 1 0 100%;
-  width: 100%;
+  max-width: 100%;
 }
 
 .flex-half {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 0 50%;
   flex: 1 0 50%;
-  width: 50%;
+  max-width: 50%;
+  min-width: 50%;
 }
 
 .d-inline {
@@ -179,6 +203,10 @@ html {
 }
 /* Specific Styles */
 
+.currency-sign {
+  border: 1px inset #ccc;
+}
+
 .display-range {
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -189,8 +217,11 @@ html {
   position: relative;
   color: var(--main-subtitle-color);
   background-color: #fff;
+  -webkit-box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
+  max-height: 600px;
+  max-width: 470px;
 }
 
 .wrapper-results {
@@ -225,6 +256,12 @@ html {
   padding: 15px;
   border: 1px solid #ccc;
   border-radius: 3px;
+  width: 100%;
+}
+
+.input-field:focus {
+  border: 1px solid #000;
+  outline: 1px solid rgba(0, 0, 0, 0.3);
 }
 
 .red-border {
@@ -233,45 +270,84 @@ html {
 
 .error-text {
   color: red;
+  margin: 0;
+  padding: 0;
 }
 
+/* Cross-browser compatible range styles */
 .range {
-  -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
-  width: 70%; /* Specific width is required for Firefox. */
-  background: transparent; /* Otherwise white in Chrome */
-}
-
-.range::-webkit-slider-thumb {
   -webkit-appearance: none;
+  -moz-apperance: none;
+  border-radius: 6px;
+  height: 8px;
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    color-stop(0.15, #1091cc),
+    color-stop(0.15, #ccc)
+  );
+  cursor: pointer;
 }
 
 .range:focus {
   outline: none;
 }
 
-.range::-ms-track {
-  width: 80%;
-  cursor: pointer;
-  /* Hides the slider so custom styles can be added */
-  background: transparent;
-  border-color: transparent;
-  color: transparent;
-}
-
-/* Styling WebKit/Blink */
 .range::-webkit-slider-thumb {
-  -webkit-appearance: none;
+  -webkit-appearance: none !important;
+  background-color: #fff;
+  border: 1px solid #cecece;
+  border-radius: 100%;
   height: 24px;
   width: 24px;
-  border-radius: 100%;
-  background: #ffffff;
-  cursor: pointer;
-  margin-top: -8px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
-  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.5); /* Add cool effects to your sliders! */
+  box-shadow: 0px 1px 1px #ccc;
 }
 
-/* Styling for Firefox, IE*/
-.range::-moz-range-thumb,
+.range::-moz-range-thumb {
+  -moz-appearance: none !important;
+  background-color: #fff;
+  border: 1px solid #cecece;
+  border-radius: 100%;
+  height: 24px;
+  width: 24px;
+  box-shadow: 0px 1px 1px #ccc;
+}
+
+.range::-moz-range-track {
+  overflow: hidden;
+  width: 100%;
+  height: 8px;
+  cursor: pointer;
+  background: transparent;
+}
+
+/*
+
+
+.
+.range::-ms-track {
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+  animate: 0.2s;
+  background: transparent;
+  border-color: transparent;
+  border-width: 16px 0;
+  color: transparent;
+}
+.range::-ms-fill-lower {
+  background: #2a6495;
+  border: 0.2px solid #010101;
+  border-radius: 2.6px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+.range::-ms-fill-upper {
+  background: #3071a9;
+  border: 0.2px solid #010101;
+  border-radius: 2.6px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
 .range::-ms-thumb {
   box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
   border: 1px solid #000000;
@@ -281,56 +357,16 @@ html {
   background: #ffffff;
   cursor: pointer;
 }
-
-.range::-webkit-slider-runnable-track {
-  width: 100%;
-  height: 8.4px;
-  cursor: pointer;
-  background-color: #1091cc;
-  border-radius: 20px;
-}
-
-.range:focus::-webkit-slider-runnable-track {
-  background-color: #1091cc;
-}
-
-.range::-moz-range-track,
-.range::-ms-track {
-  width: 100%;
-  height: 8.4px;
-  cursor: pointer;
-  background-color: #1091cc;
-  border-radius: 20px;
-}
-
-/* .range::-ms-track {
-  width: 100%;
-  height: 8.4px;
-  cursor: pointer;
-  background: transparent;
-  border-color: transparent;
-  border-width: 16px 0;
-  color: transparent;
-} */
-.range::-ms-fill-lower {
-  background: #2a6495;
-  border: 0.2px solid #010101;
-  border-radius: 2.6px;
-  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-}
 .range:focus::-ms-fill-lower {
   background: #3071a9;
 }
-.range::-ms-fill-upper {
-  background: #3071a9;
-  border: 0.2px solid #010101;
-  border-radius: 2.6px;
-  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-}
 .range:focus::-ms-fill-upper {
   background: #367ebd;
-}
+} */
 
+#results-total {
+  font-size: 1.3rem;
+}
 .value-font {
   font-size: 1rem;
   letter-spacing: 5px;
@@ -352,6 +388,8 @@ html {
 /* Animations */
 .wrapper-results.fade {
   opacity: 1;
+  -webkit-transform: translateY(0%);
+  -ms-transform: translateY(0%);
   transform: translateY(0%);
 }
 /* Media Queries */
@@ -370,12 +408,23 @@ html {
     font-family: var(--main-subtitle-color);
     font-weight: normal;
     opacity: 0;
+    -webkit-transition: opacity 0.8s ease-in, -webkit-transform 0.5s ease-in-out;
+    transition: opacity 0.8s ease-in, -webkit-transform 0.5s ease-in-out;
+    -o-transition: opacity 0.8s ease-in, transform 0.5s ease-in-out;
     transition: opacity 0.8s ease-in, transform 0.5s ease-in-out;
+    transition: opacity 0.8s ease-in, transform 0.5s ease-in-out,
+      -webkit-transform 0.5s ease-in-out;
+    transition: opacity 0.8s ease-in, transform 0.5s ease-in-out,
+      -webkit-transform 0.5s ease-in-out;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
     transform: translateY(-50%);
   }
 
   .wrapper-calc {
     margin-top: 2rem;
+    max-height: 100%;
+    max-width: 100%;
   }
 
   .container {
@@ -396,6 +445,8 @@ html {
   }
 
   .wrapper-results p {
+    -webkit-box-flex: 1;
+    -ms-flex: 1 0 50%;
     flex: 1 0 50%;
   }
 
@@ -406,6 +457,8 @@ html {
   h3.total-payment.flex-full {
     font-size: 1rem;
     font-weight: normal;
+    -webkit-box-flex: 1;
+    -ms-flex: 1 0 50%;
     flex: 1 0 50%;
   }
 
