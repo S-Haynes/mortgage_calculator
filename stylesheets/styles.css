@@ -9,7 +9,7 @@
   --results-bg-color: #eaf6fa;
 }
 
-/* Base Styles */
+/* Block/Base Styles */
 * {
   margin: 0;
   padding: 0;
@@ -28,7 +28,6 @@ input {
   width: 100%;
 }
 
-/* Reuseable Utility Classes */
 .container {
   max-width: 900px;
   max-height: 700px;
@@ -46,7 +45,7 @@ input {
   margin-bottom: 0;
 }
 
-/* Utility - Display */
+/* Reuseable Modifiers - Display */
 
 .mobile-only {
   display: none;
@@ -107,7 +106,7 @@ input {
   display: block;
 }
 
-/* Utility - Margin */
+/* Reuseable Modifiers - Margin */
 .ml-auto {
   margin-left: auto;
 }
@@ -151,7 +150,7 @@ input {
   margin-right: 2rem;
 }
 
-/* Utility - Padding */
+/* Reuseable Modifiers - Padding */
 .p-1 {
   padding: 1rem;
 }
@@ -164,7 +163,7 @@ input {
   padding: 3rem;
 }
 
-/* Utility - Font/Text */
+/* Reuseable Modifiers - font */
 
 .bold {
   font-weight: bold;
@@ -186,7 +185,12 @@ input {
   color: var(--main-subtitle-color);
 }
 
-/* Utility - Button */
+.value-font {
+  font-size: 1rem;
+  letter-spacing: 5px;
+}
+
+/* Reuseable Modifiers - Button */
 .btn {
   outline: none;
   border: none;
@@ -201,7 +205,28 @@ input {
 .btn-primary {
   background-color: var(--btn-primary-color);
 }
-/* Specific Styles */
+
+.error-text {
+  color: red;
+  margin: 0;
+  padding: 0;
+}
+
+.gray {
+  color: #3e3d3f;
+  opacity: 0.2;
+  font-weight: bold;
+}
+
+.no-word-wrap {
+  white-space: nowrap;
+}
+
+.red-border {
+  border: 1px solid red !important;
+}
+
+/* Element classes */
 
 .currency-sign {
   border: 1px inset #ccc;
@@ -212,31 +237,6 @@ input {
   border-radius: 5px;
   min-width: 50px;
   max-width: 50px;
-}
-.wrapper-calc {
-  position: relative;
-  color: var(--main-subtitle-color);
-  background-color: #fff;
-  -webkit-box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
-  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
-  border-radius: 5px;
-  max-height: 600px;
-  max-width: 470px;
-}
-
-.wrapper-results {
-  position: absolute;
-  z-index: -1;
-  top: 130px;
-  background: var(--results-bg-color);
-  height: 100%;
-  width: 100%;
-  max-height: 490px;
-  max-width: 298px;
-  margin-left: -5px;
-  text-align: left;
-  font-family: var(--main-subtitle-color);
-  font-weight: normal;
 }
 
 .hr {
@@ -264,14 +264,38 @@ input {
   outline: 1px solid rgba(0, 0, 0, 0.3);
 }
 
-.red-border {
-  border: 1px solid red;
+#results-total {
+  font-size: 1.3rem;
 }
 
-.error-text {
-  color: red;
-  margin: 0;
-  padding: 0;
+.range-val-years {
+  margin-right: 26px;
+}
+
+.wrapper-calc {
+  position: relative;
+  color: var(--main-subtitle-color);
+  background-color: #fff;
+  -webkit-box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  max-height: 600px;
+  max-width: 470px;
+}
+
+.wrapper-results {
+  position: absolute;
+  z-index: -1;
+  top: 130px;
+  background: var(--results-bg-color);
+  height: 100%;
+  width: 100%;
+  max-height: 490px;
+  max-width: 298px;
+  margin-left: -5px;
+  text-align: left;
+  font-family: var(--main-subtitle-color);
+  font-weight: normal;
 }
 
 /* Cross-browser compatible range styles */
@@ -315,17 +339,13 @@ input {
 }
 
 .range::-moz-range-track {
-  overflow: hidden;
   width: 100%;
   height: 8px;
   cursor: pointer;
   background: transparent;
+  border-color: transparent;
 }
 
-/*
-
-
-.
 .range::-ms-track {
   width: 100%;
   height: 8.4px;
@@ -336,6 +356,7 @@ input {
   border-width: 16px 0;
   color: transparent;
 }
+
 .range::-ms-fill-lower {
   background: #2a6495;
   border: 0.2px solid #010101;
@@ -362,29 +383,8 @@ input {
 }
 .range:focus::-ms-fill-upper {
   background: #367ebd;
-} */
-
-#results-total {
-  font-size: 1.3rem;
-}
-.value-font {
-  font-size: 1rem;
-  letter-spacing: 5px;
 }
 
-.gray {
-  color: #3e3d3f;
-  opacity: 0.2;
-  font-weight: bold;
-}
-
-.no-word-wrap {
-  white-space: nowrap;
-}
-
-.range-val-years {
-  margin-right: 26px;
-}
 /* Animations */
 .wrapper-results.fade {
   opacity: 1;
@@ -392,21 +392,18 @@ input {
   -ms-transform: translateY(0%);
   transform: translateY(0%);
 }
-/* Media Queries */
+
+/* Mobile Media Queries */
 @media (max-width: 760px) {
   .wrapper-results {
     display: block;
     position: relative;
-    z-index: -1;
     top: -150px;
     max-width: 100%;
     max-height: 450px;
     margin-left: 0;
     padding-bottom: 100px;
     padding-top: 100px;
-    text-align: left;
-    font-family: var(--main-subtitle-color);
-    font-weight: normal;
     opacity: 0;
     -webkit-transition: opacity 0.8s ease-in, -webkit-transform 0.5s ease-in-out;
     transition: opacity 0.8s ease-in, -webkit-transform 0.5s ease-in-out;
