@@ -38,7 +38,7 @@ const results = {};
 let errors = {};
 
 // Update mortgage key-values
-const updateMortgage = () => {
+function updateMortgage() {
   //clear errors on input change
   clearErrors();
 
@@ -51,9 +51,9 @@ const updateMortgage = () => {
   mortgage.loan = loan.value;
   mortgage.tax = tax.value;
   mortgage.insurance = insurance.value;
-};
+}
 
-const updateRangeInputs = () => {
+function updateRangeInputs() {
   display_years.innerHTML = years.value;
   display_interest.innerHTML = interest.value;
 
@@ -76,10 +76,10 @@ const updateRangeInputs = () => {
         ")";
     });
   });
-};
+}
 
 // Submit form handler
-const submitForm = () => {
+function submitForm() {
   // Check for errors initially
   const { isValid } = checkErrors(mortgage);
 
@@ -89,10 +89,10 @@ const submitForm = () => {
   }
   // Send result data if form is valid
   setResults();
-};
+}
 
 // Set the results object
-const setResults = () => {
+function setResults() {
   // Destructure mortgage obj
   const { years, interest, loan, tax, insurance } = mortgage;
 
@@ -109,9 +109,9 @@ const setResults = () => {
   ).toFixed(2);
   // Send results to the DOM
   displayResults();
-};
+}
 
-const displayResults = () => {
+function displayResults() {
   // Destructure results obj
   const { interest, tax, insurance, total } = results;
 
@@ -126,9 +126,9 @@ const displayResults = () => {
     value.style.letterSpacing = "0px";
     value.classList.remove("gray");
   });
-};
+}
 // Check form for any errors
-const checkErrors = data => {
+function checkErrors(data) {
   for (let key in data) {
     // check if input is empty
     if (data[key].length === 0) {
@@ -145,10 +145,10 @@ const checkErrors = data => {
   return {
     isValid: Object.keys(errors).length === 0
   };
-};
+}
 
 // Send errors to DOM
-const setErrors = () => {
+function setErrors() {
   if (errors.loan) {
     loan_errors.innerHTML = errors.loan;
     loan.classList.add("red-border");
@@ -163,10 +163,10 @@ const setErrors = () => {
     insurance_errors.innerHTML = errors.insurance;
     insurance.classList.add("red-border");
   }
-};
+}
 
 // Clear errors from DOM
-const clearErrors = () => {
+function clearErrors() {
   if (errors.loan) {
     loan_errors.innerHTML = "";
     loan.classList.remove("red-border");
@@ -183,12 +183,12 @@ const clearErrors = () => {
   }
   // Set errors back to empty obj
   errors = {};
-};
+}
 
 // Initialize the app values
-const init = () => {
+function init() {
   updateRangeInputs();
-};
+}
 
 init();
 
